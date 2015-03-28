@@ -41,6 +41,7 @@
     // scrollview init and layout
     _scrollView = [UIScrollView new];
     _scrollView.alwaysBounceVertical = YES;
+    _scrollView.backgroundColor = [UIColor clearColor];
     _scrollView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:_scrollView];
     
@@ -57,6 +58,27 @@
     // tap to add blocks
     UITapGestureRecognizer *tapGest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addAnotherBlockViewToScrollView:)];
     [_scrollView addGestureRecognizer:tapGest];
+    
+    // add hint below the scroll view...
+    UILabel *tapMeHint = [UILabel new];
+    tapMeHint.text = @"Tap me!";
+    tapMeHint.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:70];
+    tapMeHint.textColor = _blockViewColors[3];
+    tapMeHint.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view insertSubview:tapMeHint belowSubview:_scrollView];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tapMeHint
+                                                         attribute:NSLayoutAttributeCenterX
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:self.view
+                                                         attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1.0 constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:tapMeHint
+                                                          attribute:NSLayoutAttributeCenterY
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterY
+                                                         multiplier:1.0 constant:0]];
 }
 
 - (void)didReceiveMemoryWarning
